@@ -1,4 +1,4 @@
-# Fernet for LUA (nginx)
+# Fernet for LUA (nginx-fernet)
 
 Implementation of Fernet (https://github.com/fernet) in Lua.
 
@@ -18,7 +18,7 @@ Structurally based on Auth0's nginx-jwt module: https://github.com/auth0/nginx-j
 
 ## Usage
 
-Now we can start using the script in reverse-proxy scenarios to secure our backing service.  This is done by using the [access_by_lua](https://github.com/openresty/lua-nginx-module#access_by_lua) directive to call the `fernet-lua` script's `auth()` function before executing any [proxy_* directives](http://nginx.org/en/docs/http/ngx_http_proxy_module.html):
+Now we can start using the script in reverse-proxy scenarios to secure our backing service.  This is done by using the [access_by_lua](https://github.com/openresty/lua-nginx-module#access_by_lua) directive to call the `nginx-fernet` script's `auth()` function before executing any [proxy_* directives](http://nginx.org/en/docs/http/ngx_http_proxy_module.html):
 
 ```lua
 # nginx.conf:
