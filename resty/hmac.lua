@@ -1,3 +1,4 @@
+-- Copyright (C) 2012-2016, Thought Foundry Inc.
 
 local str_util = require "resty.string"
 local ffi = require "ffi"
