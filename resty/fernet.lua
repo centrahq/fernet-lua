@@ -114,7 +114,7 @@ function _M.verify_fernet_obj(self, secret, fernet_obj, ttl, now)
         end
     end
     
-    signature = hmac:new(sign_secret, hmac.ALGOS.SHA256):final(fernet_obj.signed)
+    local signature = hmac:new(sign_secret, hmac.ALGOS.SHA256):final(fernet_obj.signed)
 
     if signature == fernet_obj.sha256 then
         -- token valid!
@@ -122,8 +122,6 @@ function _M.verify_fernet_obj(self, secret, fernet_obj, ttl, now)
         if string.len(fernet_obj.payload) % aesBlocksize ~= 0 then
             fernet_obj["reason"] = "wrong blocksize"
         else
-
-            string.bytes(crypt_secret)
     
             local aes_128_cbc_with_iv = assert(aes:new(crypt_secret,
             nil, aes.cipher(128,"cbc"), {iv=fernet_obj.iv}))
