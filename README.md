@@ -25,9 +25,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 ### resty-hmac
 
-Copyright and License
-=====================
-
 This module is licensed under the BSD license.
 
 Copyright (C) 2012-2016, Thought Foundry Inc.
