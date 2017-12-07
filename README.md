@@ -4,10 +4,41 @@ Implementation of Fernet (https://github.com/fernet) in Lua.
 
 Using https://github.com/jkeys089/lua-resty-hmac for HMAC SHA256 and https://github.com/openresty/lua-resty-string for AES
 
+Structurally based on Auth0's nginx-jwt module: https://github.com/auth0/nginx-jwt
+
+## Configuration
+
+1. Export the `FERNET_SECRET` and `FERNET_TTL` environment variables on the Nginx host, setting them equal to your Fernet secret and ttl.  Then expose it to Nginx server:  
+    ```lua
+    # nginx.conf:
+
+    env FERNET_SECRET;
+    env FERNET_TTL;
+    ```
+
+## Usage
+
+Now we can start using the script in reverse-proxy scenarios to secure our backing service.  This is done by using the [access_by_lua](https://github.com/openresty/lua-nginx-module#access_by_lua) directive to call the `fernet-lua` script's `auth()` function before executing any [proxy_* directives](http://nginx.org/en/docs/http/ngx_http_proxy_module.html):
+
+```lua
+# nginx.conf:
+
+server {
+    location /secure_this {
+        access_by_lua '
+            local fernet = require("nginx-fernet")
+            fernet.auth()
+        ';
+
+        proxy_pass http://my-backend.com$uri;
+    }
+}
+```
+    
 Copyright and License
 =====================
 
-### resty-fernet
+### nginx-fernet
 
 This module is licensed under the BSD license.
 
