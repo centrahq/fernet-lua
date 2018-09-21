@@ -30,7 +30,7 @@ server {
             fernet.auth()
         ';
 
-        proxy_pass http://my-backend.com$uri;
+        proxy_pass http://my-backend.com$request_uri;
     }
 }
 ```
